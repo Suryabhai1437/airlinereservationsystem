@@ -1,0 +1,945 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/AirlineReservationSystem1",
+  "tags": [
+    {
+      "name": "admin-controller",
+      "description": "Admin Controller"
+    },
+    {
+      "name": "flight-controller",
+      "description": "Flight Controller"
+    },
+    {
+      "name": "ticket-controller",
+      "description": "Ticket Controller"
+    },
+    {
+      "name": "user-controller",
+      "description": "User Controller"
+    }
+  ],
+  "paths": {
+    "/addBooking": {
+      "post": {
+        "tags": [
+          "ticket-controller"
+        ],
+        "summary": "addBooking",
+        "operationId": "addBookingUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ticket",
+            "description": "ticket",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ticket"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/adminControl/addFlightDetails": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "summary": "addFlightDetails",
+        "operationId": "addFlightDetailsUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "flight",
+            "description": "flight",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Flight"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/adminControl/deleteflight/{flId}": {
+      "delete": {
+        "tags": [
+          "admin-controller"
+        ],
+        "summary": "deleteFlight",
+        "operationId": "deleteFlightUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "flId",
+            "in": "path",
+            "description": "flId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/adminControl/login/{emailid}/{password}": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "summary": "checkAdmin",
+        "operationId": "checkAdminUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "emailid",
+            "in": "path",
+            "description": "emailid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/adminControl/updateFlightDetails": {
+      "put": {
+        "tags": [
+          "admin-controller"
+        ],
+        "summary": "updateFlightDetails",
+        "operationId": "updateFlightDetailsUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "flight",
+            "description": "flight",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Flight"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/allSeatStatus/{flId}": {
+      "get": {
+        "tags": [
+          "ticket-controller"
+        ],
+        "summary": "getAllSeatStatus",
+        "operationId": "getAllSeatStatusUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "flId",
+            "in": "path",
+            "description": "flId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WSeat"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/arscontrol/adduser": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "addUser",
+        "operationId": "addUserUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/arscontrol/alluser": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "getAllUser",
+        "operationId": "getAllUserUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/arscontrol/deleteuser/{email_id}/": {
+      "delete": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "deleteUser",
+        "operationId": "deleteUserUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "email_id",
+            "in": "path",
+            "description": "email_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/arscontrol/getuserbyid/{email_id}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "getUserById",
+        "operationId": "getUserByIdUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "email_id",
+            "in": "path",
+            "description": "email_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/arscontrol/login/{email_id}/{password}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "login",
+        "operationId": "loginUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "email_id",
+            "in": "path",
+            "description": "email_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/arscontrol/updateuser": {
+      "put": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "updateUser",
+        "operationId": "updateUserUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/cancelTicket/{aadharId}/{flId}": {
+      "delete": {
+        "tags": [
+          "ticket-controller"
+        ],
+        "summary": "cancelTicket",
+        "operationId": "cancelTicketUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "aadharId",
+            "in": "path",
+            "description": "aadharId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "flId",
+            "in": "path",
+            "description": "flId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/flights/allFlights": {
+      "get": {
+        "tags": [
+          "flight-controller"
+        ],
+        "summary": "getAllFlights",
+        "operationId": "getAllFlightsUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Flight"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/flights/getBySrcAndDes/{src}/{des}": {
+      "get": {
+        "tags": [
+          "flight-controller"
+        ],
+        "summary": "getBySrcAndDes",
+        "operationId": "getBySrcAndDesUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "des",
+            "in": "path",
+            "description": "des",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "src",
+            "in": "path",
+            "description": "src",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Flight"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/flights/getFlightByid/{flId}": {
+      "get": {
+        "tags": [
+          "flight-controller"
+        ],
+        "summary": "getflight",
+        "operationId": "getflightUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "flId",
+            "in": "path",
+            "description": "flId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Flight"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/getTicketByid/{aadharId}": {
+      "get": {
+        "tags": [
+          "ticket-controller"
+        ],
+        "summary": "getTicketByid",
+        "operationId": "getTicketByidUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "aadharId",
+            "in": "path",
+            "description": "aadharId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Ticket"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "ClassPrice": {
+      "type": "object",
+      "properties": {
+        "businessClassCost": {
+          "type": "number",
+          "format": "float"
+        },
+        "economyClassCost": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "ClassPrice"
+    },
+    "Flight": {
+      "type": "object",
+      "properties": {
+        "airlineName": {
+          "type": "string"
+        },
+        "classPrice": {
+          "$ref": "#/definitions/ClassPrice"
+        },
+        "desTime": {
+          "type": "string"
+        },
+        "endDes": {
+          "type": "string"
+        },
+        "flDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "flId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "flName": {
+          "type": "string"
+        },
+        "srcTime": {
+          "type": "string"
+        },
+        "startDes": {
+          "type": "string"
+        },
+        "totalAvailableSeat": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalBookedSeat": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalSeat": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Flight"
+    },
+    "Phone": {
+      "type": "object",
+      "properties": {
+        "phone1": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "phone2": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Phone"
+    },
+    "Ticket": {
+      "type": "object",
+      "properties": {
+        "aadharId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "address": {
+          "type": "string"
+        },
+        "bookingDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "flight": {
+          "$ref": "#/definitions/Flight"
+        },
+        "name": {
+          "$ref": "#/definitions/UserName"
+        },
+        "passportNo": {
+          "type": "string"
+        },
+        "seatClass": {
+          "type": "string"
+        },
+        "seatNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ticketPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "ticket_price": {
+          "type": "number",
+          "format": "double"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "title": "Ticket"
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "emailId": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "$ref": "#/definitions/Phone"
+        },
+        "userName": {
+          "$ref": "#/definitions/UserName"
+        }
+      },
+      "title": "User"
+    },
+    "UserName": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "title": "UserName"
+    },
+    "WSeat": {
+      "type": "object",
+      "properties": {
+        "aadharId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "flightId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seatNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seatStatus": {
+          "type": "string"
+        }
+      },
+      "title": "WSeat"
+    }
+  }
+}
