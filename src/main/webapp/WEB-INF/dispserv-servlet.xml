@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	<context:component-scan base-package="com.ars.*"></context:component-scan>
+	<mvc:annotation-driven />
+	<tx:annotation-driven />
+	<context:annotation-config />
+	<context:property-placeholder
+		location="classpath:database.properties" />
+
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${database.driver}"></property>
+		<property name="url" value="${database.url}"></property>
+		<property name="username" value="${database.username}"></property>
+		<property name="password" value="${database.password}"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.ars.entity.User</value>
+				<value>com.ars.entity.Admin</value>
+				<value>com.ars.entity.Flight</value>
+				
+				<value>com.ars.entity.Ticket</value>
+				<value>com.ars.entity.WSeat</value>
+				
+				
+			</list>
+		</property>
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="admin" class="com.ars.entity.Admin">
+		<property name="emailId" value="${admin_emailId}"></property>
+		<property name="password" value="${admin_password}"></property>
+		<property name="adminName" value="${admin_username}"></property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+
+	<bean id="user" class="com.ars.entity.User" />
+	<bean id="flight" class="com.ars.entity.Flight" />
+	<bean id="ticket" class="com.ars.entity.Ticket" />
+	<bean id="wSeat" class="com.ars.entity.WSeat" />
+	
+	<bean id="userDao" class="com.ars.dao.UserDaoImpl" />
+	
+	<bean id="flightDao" class="com.ars.dao.FlightDaoImpl"/>
+	<bean id="ticketDao" class="com.ars.dao.TicketDaoImpl"/>
+	<bean id="wSeatDao" class="com.ars.dao.WSeatDaoImpl" />
+	
+	<bean id="userService" class="com.ars.service.UserServiceImpl" />
+	<bean id="flightService" class="com.ars.service.FlightServiceImpl" />
+	<bean id="wSeatService" class="com.ars.service.WSeatServiceImpl" />
+	<bean id="ticketService" class="com.ars.service.TicketServiceImpl"/>
+	
+</beans>
+
